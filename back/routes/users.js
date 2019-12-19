@@ -9,5 +9,4 @@ router.post("/", (req, res) => {
   res.send("Registers a user");
 });
 
-// ! ALWAYS EXPORT THE ROUTER
 module.exports = router;
