@@ -1,7 +1,11 @@
 // Libraries
 const express = require("express");
 const router = express.Router();
+
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+
 const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
@@ -38,7 +42,7 @@ router.post(
       if (user) {
         res
           .status(400)
-          .json({ msg: "A user already exitst with the passed email" });
+          .json({ msg: "A user already exists with the passed email" });
       } else {
         // Create a new instance of the user with the passed data
         user = new User({
@@ -50,17 +54,34 @@ router.post(
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
 
-        await user.save();
+        await user.save(); // Saves the new user to our mongo database
 
-        res.send("User created!");
+        // --- Creating and handling our JWT --- //
+        const payload = {
+          user: {
+            id: user.id
+          }
+        };
+
+        jwt.sign(
+          payload,
+          config.get("jwtSecret"),
+          {
+            expiresIn: 360000
+          },
+          (err, token) => {
+            if (err) throw err;
+
+            res.json({ token });
+          }
+        );
+        // --- --- //
       }
     } catch (err) {
       console.error(err.message);
 
       res.status(500).json({ msg: "Server error" });
     }
-
-    res.send("User created!");
   }
 );
 
