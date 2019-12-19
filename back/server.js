@@ -8,6 +8,9 @@ const PORT = process.env.PORT || 5000;
 
 connectDb(); // Connects to our MongoDb database
 
+// Middleware
+app.use(express.json({ extended: false })); // This will let us pass data to the body of our requests
+
 // Routes
 app.use("/api/users", require("./routes/users"));
 app.use("/api/wishes", require("./routes/wishes"));
