@@ -7,6 +7,7 @@ import ListItem from "./ListItem";
 
 // Styles
 import { SectionContainer } from "../../../../style";
+import { Grid } from "./listItems.styled";
 
 const ListItems = () => {
   const listItemContext = useContext(ListItemContext);
@@ -20,13 +21,7 @@ const ListItems = () => {
         Your wish list items
       </h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap"
-        }}
-      >
+      <Grid>
         {items.map(item => (
           <ListItem
             name={item.name}
@@ -34,7 +29,7 @@ const ListItems = () => {
             isBought={item.isBought}
           />
         ))}
-      </div>
+      </Grid>
     </SectionContainer>
   );
 };
