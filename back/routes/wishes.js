@@ -66,15 +66,60 @@ router.post(
 // @route   PUT api/wishes/:id
 // @desc    Update an item from the users wish list
 // @access  Private
-router.put("/:id", (req, res) => {
-  res.send("Update an item from the users wish list");
+router.put("/:id", auth, async (req, res) => {
+  const { name, isBought, link } = req.body;
+
+  // Building our new item object based on the passed params
+  let itemFields = {};
+  if (name) itemFields.name = name;
+  if (isBought) itemFields.isBought = isBought;
+  if (link) itemFields.link = link;
+
+  try {
+    let listItem = await ListItem.findById(req.params.id);
+
+    if (!listItem)
+      return res.status(404).json({ msg: "Error | Item not found" });
+
+    // We make sure the item we are trying to update is from the logged in user
+    if (listItem.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Error | Not authorized" });
+    } else {
+      listItem = await ListItem.findByIdAndUpdate(
+        req.params.id,
+        { $set: itemFields },
+        { new: true }
+      );
+
+      res.json(listItem);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("500 | Server error");
+  }
 });
 
 // @route   DELETE api/wishes/:id
 // @desc    Delete an item from the users wish list
 // @access  Private
-router.delete("/:id", (req, res) => {
-  res.send("Delete an item from the users wish list");
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    let listItem = await ListItem.findById(req.params.id);
+
+    if (!listItem)
+      return res.status(404).json({ msg: "Error | Item not found" });
+
+    if (listItem.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Error | Not authorized" });
+    } else {
+      await ListItem.findByIdAndDelete(req.params.id);
+    }
+
+    res.json({ msg: "Success! Item deleted" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("500 | Server error");
+  }
 });
 
 module.exports = router;
