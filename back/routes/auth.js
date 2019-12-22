@@ -10,11 +10,20 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
 
+// Middleware
+const auth = require("../middleware/auth"); // We can now just add auth to any route we want to protect
+
 // @route   GET api/auth
 // @desc    Get the current logged in user
 // @access  Private
-router.get("/", (req, res) => {
-  res.send("Get the current logged in user");
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("500 | Server error");
+  }
 });
 
 // @route   POST api/auth
