@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const SectionContainer = styled.div`
-  max-width: 66rem;
+  max-width: 76rem;
   margin: 0 auto;
-
-  background-color: pink;
 `;

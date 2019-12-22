@@ -5,6 +5,7 @@ import ListItemState from "./context/listItem/ListItemState";
 
 // Component Imports
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
 
           <Route component={() => <h1>404</h1>} />
         </Switch>

@@ -3,15 +3,14 @@ import React from "react";
 
 // Component Imports
 import Navbar from "../components/layout/Navbar";
-import ListItems from "../components/containers/Home/ListItems";
 
-const Home = () => {
+const Login = () => {
   return (
     <div>
       <Navbar />
-      <ListItems />
+      <h1>This is the login page</h1>
     </div>
   );
 };
 
-export default Home;
+export default Login;
