@@ -53,6 +53,15 @@ const ListItemState = props => {
   const [state, dispatch] = useReducer(ListItemReducer, initialState);
 
   // Add item
+  const addListItem = listItem => {
+    listItem.id = uuid.v4();
+
+    dispatch({
+      type: ADD_LIST_ITEM,
+      payload: listItem
+    });
+  };
+
   // Delete item
   // Set current item
   // Clear current item
@@ -62,7 +71,7 @@ const ListItemState = props => {
 
   // Returning our provider, which we will be able to use to access our state while wrapping it in our app
   return (
-    <ListItemContext.Provider value={{ items: state.items }}>
+    <ListItemContext.Provider value={{ items: state.items, addListItem }}>
       {props.children}
     </ListItemContext.Provider>
   );

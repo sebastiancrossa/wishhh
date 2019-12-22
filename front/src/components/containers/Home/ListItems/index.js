@@ -11,6 +11,7 @@ import { SectionContainer } from "../../../../style";
 const ListItems = () => {
   const listItemContext = useContext(ListItemContext);
 
+  // Decosntructing our items from state
   const { items } = listItemContext;
 
   return (
