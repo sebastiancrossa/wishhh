@@ -15,6 +15,7 @@ router.get("/", auth, async (req, res) => {
     const listItems = await ListItem.find({ user: req.user.id }).sort({
       date: -1
     });
+
     res.json(listItems);
   } catch (error) {
     console.error(err);
@@ -25,9 +26,42 @@ router.get("/", auth, async (req, res) => {
 // @route   POST api/wishes
 // @desc    Add a new item to the wish list
 // @access  Private
-router.post("/", (req, res) => {
-  res.send("Add a new item to the wish list");
-});
+router.post(
+  "/",
+  [
+    auth,
+    [
+      check("name", "Product name is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    // Check if we have errors from the request body parameters
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { name, isBought, link } = req.body;
+
+    try {
+      const newListItem = new ListItem({
+        name,
+        isBought,
+        link,
+        user: req.user.id
+      });
+
+      const listItem = await newListItem.save();
+      res.json(listItem);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("500 | Server error");
+    }
+  }
+);
 
 // @route   PUT api/wishes/:id
 // @desc    Update an item from the users wish list

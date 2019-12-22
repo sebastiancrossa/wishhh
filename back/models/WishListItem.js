@@ -10,9 +10,12 @@ const WishListItemSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  type: {
-    type: String,
-    default: "bought"
+  isBought: {
+    type: Boolean,
+    default: false
+  },
+  link: {
+    type: String
   },
   date: {
     type: Date,
