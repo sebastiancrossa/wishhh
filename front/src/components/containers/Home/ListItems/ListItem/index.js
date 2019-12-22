@@ -2,14 +2,27 @@
 import React from "react";
 
 // Styles
-import { Card } from "./listItem.style";
+import { Card, ItemLinkButton } from "./listItem.style";
 
 const ListItem = ({ name, link, isBought }) => {
   return (
     <Card>
-      <p>{name}</p>
-      <p>{link}</p>
-      <p>{isBought ? "Item bought" : "Not yet owned"}</p>
+      <div style={{ marginBottom: "0.7rem", textAlign: "center" }}>
+        <p
+          style={{
+            fontWeight: "700"
+          }}
+        >
+          {name}
+        </p>
+        <p style={{ color: "var(--color-text-light)" }}>
+          {isBought ? "Owned" : "Not owned"}
+        </p>
+      </div>
+
+      <ItemLinkButton href={`${link}`} target="_blank">
+        {isBought ? "Buy again" : "Buy"}
+      </ItemLinkButton>
     </Card>
   );
 };

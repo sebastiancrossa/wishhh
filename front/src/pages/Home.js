@@ -10,6 +10,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+
       <Form />
       <ListItems />
     </div>

@@ -17,7 +17,9 @@ export default createGlobalStyle`
         /* CSS variables that can be used globally */
         --color-main: ${({ theme }) => theme.colors.main};
         --color-white: ${({ theme }) => theme.colors.whiteColor};
+        --color-gray: ${({ theme }) => theme.colors.grayColor};
         --color-text: ${({ theme }) => theme.colors.textColor};
+        --color-text-light: ${({ theme }) => theme.colors.lightTextColor};
         --color-shadow: ${({ theme }) => theme.colors.shadow};
     
     }

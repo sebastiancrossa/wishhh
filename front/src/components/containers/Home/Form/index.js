@@ -4,7 +4,7 @@ import ListItemContext from "../../../../context/listItem/listItemContext";
 import useInputState from "../../../../hooks/useInputState";
 
 // Style
-import { CustomForm } from "./form.style";
+import { CustomForm, CustomInput, SubmitButton } from "./form.style";
 
 const Form = () => {
   const listItemContext = useContext(ListItemContext);
@@ -26,31 +26,37 @@ const Form = () => {
     resetLink();
   };
 
+  const isInvalid = name === "";
+
   return (
     <CustomForm>
       <h2>Add new item</h2>
 
-      <div>
-        <p>Product name:</p>
-        <input
-          type="text"
-          placeholder="Name..."
-          value={name}
-          onChange={onNameChange}
-        />
+      <div style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "0.7rem" }}>
+          <p>Product name:</p>
+          <CustomInput
+            type="text"
+            placeholder="Name..."
+            value={name}
+            onChange={onNameChange}
+          />
+        </div>
+
+        <div>
+          <p>Product link:</p>
+          <CustomInput
+            type="text"
+            placeholder="Link..."
+            value={link}
+            onChange={onLinkChange}
+          />
+        </div>
       </div>
 
-      <div>
-        <p>Product link:</p>
-        <input
-          type="text"
-          placeholder="Link..."
-          value={link}
-          onChange={onLinkChange}
-        />
-      </div>
-
-      <button onClick={() => handleSubmit()}>Add item</button>
+      <SubmitButton disabled={isInvalid} onClick={() => handleSubmit()}>
+        Add item
+      </SubmitButton>
     </CustomForm>
   );
 };
