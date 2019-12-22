@@ -1,12 +1,25 @@
 // Libraries
 const express = require("express");
 const router = express.Router();
+const auth = require("../middleware/auth");
+const { check, validationResult } = require("express-validator");
+
+const User = require("../models/User");
+const ListItem = require("../models/WishListItem");
 
 // @route   GET api/wishes
 // @desc    Get all items from users wish list
 // @access  Private
-router.get("/", (req, res) => {
-  res.send("Get all items from users wish list");
+router.get("/", auth, async (req, res) => {
+  try {
+    const listItems = await ListItem.find({ user: req.user.id }).sort({
+      date: -1
+    });
+    res.json(listItems);
+  } catch (error) {
+    console.error(err);
+    res.status(500).send("500 | Server error");
+  }
 });
 
 // @route   POST api/wishes

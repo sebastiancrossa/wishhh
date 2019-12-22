@@ -2,6 +2,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
+// Middleware that will only let us access routes if there is a token
+// passed in the header
 module.exports = function(req, res, next) {
   // Extract the token from header
   const token = req.header("x-auth-token");
