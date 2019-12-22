@@ -6,7 +6,7 @@ export const CustomNavbar = styled.nav`
   align-items: center;
 
   background-color: var(--color-white);
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 2rem;
 
   width: 100%;
 `;
