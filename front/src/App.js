@@ -1,7 +1,7 @@
 // Libraries
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ListItemState from "./context/listItem/state";
+import WishListState from "./context/WishList/state";
 
 // Component Imports
 import Home from "./pages/Home";
@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <ListItemState>
+    <WishListState>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -18,7 +18,7 @@ function App() {
           <Route component={() => <h1>404</h1>} />
         </Switch>
       </BrowserRouter>
-    </ListItemState>
+    </WishListState>
   );
 }
 

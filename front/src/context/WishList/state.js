@@ -2,8 +2,8 @@
 import React, { useReducer } from "react";
 import uuid from "uuid";
 
-import ListItemContext from "./context";
-import ListItemReducer from "./reducer";
+import WishListContext from "./context";
+import WishListReducer from "./reducer";
 import {
   ADD_LIST_ITEM,
   DELETE_LIST_ITEM,
@@ -14,7 +14,7 @@ import {
   CLEAR_FILTER
 } from "../types";
 
-const ListItemState = props => {
+const WishListState = props => {
   const initialState = {
     items: [
       {
@@ -50,7 +50,7 @@ const ListItemState = props => {
     ]
   };
 
-  const [state, dispatch] = useReducer(ListItemReducer, initialState);
+  const [state, dispatch] = useReducer(WishListReducer, initialState);
 
   // Add item
   const addListItem = listItem => {
@@ -78,12 +78,12 @@ const ListItemState = props => {
 
   // Returning our provider, which we will be able to use to access our state while wrapping it in our app
   return (
-    <ListItemContext.Provider
+    <WishListContext.Provider
       value={{ items: state.items, addListItem, deleteItem }}
     >
       {props.children}
-    </ListItemContext.Provider>
+    </WishListContext.Provider>
   );
 };
 
-export default ListItemState;
+export default WishListState;

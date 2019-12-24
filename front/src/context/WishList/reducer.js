@@ -9,7 +9,7 @@ import {
   CLEAR_FILTER
 } from "../types";
 
-export default (state, action) => {
+const WishListReducer = (state, action) => {
   switch (action.type) {
     case ADD_LIST_ITEM:
       return {
@@ -27,3 +27,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default WishListReducer;

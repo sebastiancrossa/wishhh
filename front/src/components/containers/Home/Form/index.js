@@ -1,13 +1,13 @@
 // Libraries
 import React, { useContext } from "react";
-import ListItemContext from "../../../../context/listItem/context";
+import WishListContext from "../../../../context/WishList/context";
 import useInputState from "../../../../hooks/useInputState";
 
 // Style
 import { CustomForm, CustomInput, SubmitButton } from "./form.style";
 
 const Form = () => {
-  const listItemContext = useContext(ListItemContext);
+  const wishListContext = useContext(WishListContext);
 
   // Form state
   const [name, setName, onNameChange, resetName] = useInputState("");
@@ -20,7 +20,7 @@ const Form = () => {
     };
 
     // Context method to create a new list item
-    listItemContext.addListItem(newListItem);
+    wishListContext.addListItem(newListItem);
 
     resetName();
     resetLink();

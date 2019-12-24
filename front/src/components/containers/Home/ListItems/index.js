@@ -1,6 +1,6 @@
 // Libraries
 import React, { useContext } from "react";
-import ListItemContext from "../../../../context/listItem/context";
+import WishListContext from "../../../../context/WishList/context";
 import { CSSTransition } from "react-transition-group";
 
 // Component Imports
@@ -11,10 +11,10 @@ import { SectionContainer } from "../../../../style";
 import { Grid } from "./listItems.styled";
 
 const ListItems = () => {
-  const listItemContext = useContext(ListItemContext);
+  const wishListContext = useContext(WishListContext);
 
-  // Decosntructing our items from state
-  const { items } = listItemContext;
+  // Deconstructing our items from state
+  const { items } = wishListContext;
 
   return (
     <SectionContainer>
