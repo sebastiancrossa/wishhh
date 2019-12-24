@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
+  position: relative;
+
   padding: 1rem;
   background-color: pink;
 
@@ -13,6 +15,19 @@ export const Card = styled.div`
   -webkit-box-shadow: 0px 0px 80px -15px rgba(136, 186, 255, 0.34);
   -moz-box-shadow: 0px 0px 80px -15px rgba(136, 186, 255, 0.34);
   box-shadow: 0px 0px 80px -15px rgba(136, 186, 255, 0.34);
+`;
+
+export const DeleteButton = styled.div`
+  position: absolute;
+
+  width: 0.8rem;
+  height: 0.8rem;
+
+  border-radius: 50%;
+
+  background-color: var(--color-red);
+
+  cursor: pointer;
 `;
 
 export const ItemLinkButton = styled.a`

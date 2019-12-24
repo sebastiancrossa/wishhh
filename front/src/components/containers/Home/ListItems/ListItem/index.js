@@ -1,13 +1,22 @@
 // Libraries
-import React from "react";
+import React, { useContext } from "react";
+import ListItemContext from "../../../../../context/listItem/context";
 
 // Styles
-import { Card, ItemLinkButton } from "./listItem.style";
+import { Card, DeleteButton, ItemLinkButton } from "./listItem.style";
 
-const ListItem = ({ name, link, isBought }) => {
+const ListItem = ({ id, name, link, isBought }) => {
+  const listItemContext = useContext(ListItemContext);
+
+  const onItemDelete = async () => {
+    await listItemContext.deleteItem(id);
+  };
+
   return (
     <Card>
       <div style={{ marginBottom: "0.7rem", textAlign: "center" }}>
+        <DeleteButton onClick={() => onItemDelete()} />
+
         <p
           style={{
             fontWeight: "700"

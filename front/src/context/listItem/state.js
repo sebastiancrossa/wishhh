@@ -2,8 +2,8 @@
 import React, { useReducer } from "react";
 import uuid from "uuid";
 
-import ListItemContext from "./listItemContext";
-import ListItemReducer from "./listItemReducer";
+import ListItemContext from "./context";
+import ListItemReducer from "./reducer";
 import {
   ADD_LIST_ITEM,
   DELETE_LIST_ITEM,
@@ -63,6 +63,13 @@ const ListItemState = props => {
   };
 
   // Delete item
+  const deleteItem = id => {
+    dispatch({
+      type: DELETE_LIST_ITEM,
+      payload: id
+    });
+  };
+
   // Set current item
   // Clear current item
   // Update item
@@ -71,7 +78,9 @@ const ListItemState = props => {
 
   // Returning our provider, which we will be able to use to access our state while wrapping it in our app
   return (
-    <ListItemContext.Provider value={{ items: state.items, addListItem }}>
+    <ListItemContext.Provider
+      value={{ items: state.items, addListItem, deleteItem }}
+    >
       {props.children}
     </ListItemContext.Provider>
   );

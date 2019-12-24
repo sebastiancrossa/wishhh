@@ -1,6 +1,6 @@
 // Libraries
 import React, { useContext } from "react";
-import ListItemContext from "../../../../context/listItem/listItemContext";
+import ListItemContext from "../../../../context/listItem/context";
 
 // Component Imports
 import ListItem from "./ListItem";
@@ -24,6 +24,7 @@ const ListItems = () => {
       <Grid>
         {items.map(item => (
           <ListItem
+            id={item.id}
             name={item.name}
             link={item.link}
             isBought={item.isBought}

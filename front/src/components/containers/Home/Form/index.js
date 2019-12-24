@@ -1,6 +1,6 @@
 // Libraries
 import React, { useContext } from "react";
-import ListItemContext from "../../../../context/listItem/listItemContext";
+import ListItemContext from "../../../../context/listItem/context";
 import useInputState from "../../../../hooks/useInputState";
 
 // Style

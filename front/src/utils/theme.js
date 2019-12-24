@@ -3,6 +3,7 @@ const theme = {
     main: "#88BAFF",
     whiteColor: "#FFFFFF",
     grayColor: "#DDE3E8",
+    redColor: "#F2687F",
     textColor: "#47596D",
     lightTextColor: "#A4AAB4",
     shadow: "rgba(0, 0, 0, 0.07)"
