@@ -4,15 +4,7 @@ import uuid from "uuid";
 
 import WishListContext from "./context";
 import WishListReducer from "./reducer";
-import {
-  ADD_LIST_ITEM,
-  DELETE_LIST_ITEM,
-  SET_CURRENT,
-  CLEAR_CURRENT,
-  UPDATE_ITEM,
-  FILTER_ITEMS,
-  CLEAR_FILTER
-} from "../types";
+import { ADD_LIST_ITEM, DELETE_LIST_ITEM } from "../types";
 
 const WishListState = props => {
   const initialState = {
