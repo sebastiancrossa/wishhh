@@ -1,6 +1,7 @@
 // Libraries
 import React, { useContext } from "react";
 import ListItemContext from "../../../../context/listItem/context";
+import { CSSTransition } from "react-transition-group";
 
 // Component Imports
 import ListItem from "./ListItem";
@@ -23,12 +24,14 @@ const ListItems = () => {
 
       <Grid>
         {items.map(item => (
-          <ListItem
-            id={item.id}
-            name={item.name}
-            link={item.link}
-            isBought={item.isBought}
-          />
+          <CSSTransition key={item.id} timeout={500} classNames="item">
+            <ListItem
+              id={item.id}
+              name={item.name}
+              link={item.link}
+              isBought={item.isBought}
+            />
+          </CSSTransition>
         ))}
       </Grid>
     </SectionContainer>

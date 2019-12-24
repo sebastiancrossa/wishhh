@@ -11,8 +11,10 @@ const Home = () => {
     <div>
       <Navbar />
 
-      <Form />
-      <ListItems />
+      <div style={{ marginTop: "8rem" }}>
+        <Form />
+        <ListItems />
+      </div>
     </div>
   );
 };
