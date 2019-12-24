@@ -14,3 +14,7 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 // ---- Wish List ---- //
 export const ADD_LIST_ITEM = "ADD_LIST_ITEM";
 export const DELETE_LIST_ITEM = "DELETE_LIST_ITEM";
+
+// ---- Alerts ---- //
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";

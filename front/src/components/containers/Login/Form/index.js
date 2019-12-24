@@ -29,7 +29,7 @@ const Form = () => {
     <CustomForm>
       <h2>Login</h2>
 
-      <div style={{ marginBottom: "1rem" }}>
+      <div style={{ marginBottom: "1rem", textAlign: "left" }}>
         <div style={{ marginBottom: "0.7rem" }}>
           <p>Name:</p>
           <CustomInput

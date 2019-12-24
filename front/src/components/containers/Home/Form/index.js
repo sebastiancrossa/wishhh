@@ -32,7 +32,7 @@ const Form = () => {
     <CustomForm>
       <h2>Add new item</h2>
 
-      <div style={{ marginBottom: "1rem" }}>
+      <div style={{ marginBottom: "1rem", textAlign: "left" }}>
         <div style={{ marginBottom: "0.7rem" }}>
           <p>Product name:</p>
           <CustomInput
