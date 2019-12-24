@@ -1,11 +1,11 @@
-// Libraries
+// Librares
 import React from "react";
 
 // Component Imports
 import Navbar from "../components/layout/Navbar";
-import Form from "../components/containers/Login/Form";
+import Form from "../components/containers/Register/Form";
 
-const Login = () => {
+const Register = () => {
   return (
     <div>
       <Navbar />
@@ -17,4 +17,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
