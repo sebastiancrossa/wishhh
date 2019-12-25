@@ -1,11 +1,15 @@
 // Libraries
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../../../context/Auth/context";
 import useInputState from "../../../../hooks/useInputState";
 
 // Styles
 import { CustomForm, CustomInput, SubmitButton } from "./form.style";
 
 const Form = () => {
+  const authContext = useContext(AuthContext);
+  const { registerUser } = authContext;
+
   // Form state
   const [name, setName, onNameChange, resetName] = useInputState("");
   const [email, setEmail, onEmailChange, resetEmail] = useInputState("");
@@ -23,11 +27,11 @@ const Form = () => {
   ] = useInputState("");
 
   const handleSubmit = () => {
-    const newUser = {
-      name: name,
-      email: email,
-      password: password
-    };
+    registerUser({
+      name,
+      email,
+      password
+    });
 
     resetName();
     resetEmail();
