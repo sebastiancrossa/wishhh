@@ -10,6 +10,7 @@ import AlertState from "./context/Alert/state";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Alerts from "./components/layout/Navbar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <AlertState>
         <WishListState>
           <BrowserRouter>
+            <Alerts />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />

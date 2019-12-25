@@ -37,6 +37,7 @@ const Form = () => {
             placeholder="Name..."
             value={name}
             onChange={onNameChange}
+            required
           />
         </div>
 
@@ -47,6 +48,7 @@ const Form = () => {
             placeholder="Email..."
             value={email}
             onChange={onEmailChange}
+            required
           />
         </div>
 
