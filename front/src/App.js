@@ -1,6 +1,7 @@
 // Libraries
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
 
 import AuthState from "./context/Auth/state";
 import WishListState from "./context/WishList/state";
@@ -28,7 +29,7 @@ function App() {
           <BrowserRouter>
             <Alerts />
             <Switch>
-              <Route exact path="/" component={Home} />
+              <ProtectedRoute exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
 
