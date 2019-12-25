@@ -76,7 +76,30 @@ const AuthState = ({ children }) => {
   };
 
   // Login user
+  const loginUser = async formData => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    try {
+      const res = await axios.post(`${backendUrl}/api/auth`, formData, config);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error.response.data.msg
+      });
+    }
+  };
+
   // Logout user
+
   // Clear errors
 
   return (
@@ -87,6 +110,7 @@ const AuthState = ({ children }) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         error: state.error,
+        loginUser,
         registerUser,
         loadUser
       }}
