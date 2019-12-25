@@ -5,11 +5,34 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  AUTH_ERROR
 } from "../types";
 
 const AuthReducer = (state, action) => {
   switch (action.type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload
+      };
+
+    case AUTH_ERROR:
+      // Removing any token in localStorage if registration failed
+      localStorage.removeItem("token");
+
+      // Reseting all of our values
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: false,
+        loading: false,
+        error: action.payload
+      };
+
     case REGISTER_SUCCESS:
       // Adding the received token to localStorage
       localStorage.setItem("token", action.payload.token);
@@ -22,10 +45,8 @@ const AuthReducer = (state, action) => {
       };
 
     case REGISTER_FAIL:
-      // Removing any token in localStorage if registration failed
       localStorage.removeItem("token");
 
-      // Reseting all of our values
       return {
         ...state,
         token: null,

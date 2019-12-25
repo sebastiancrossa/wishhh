@@ -1,6 +1,7 @@
 // Libraries
 const express = require("express");
 const connectDb = require("./config/db");
+const cors = require("cors");
 
 // Initialization
 const app = express();
@@ -10,6 +11,7 @@ connectDb(); // Connects to our MongoDb database
 
 // Middleware
 app.use(express.json({ extended: false })); // This will let us pass data to the body of our requests
+app.use(cors());
 
 // Routes
 app.use("/api/users", require("./routes/users"));

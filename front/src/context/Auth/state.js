@@ -1,6 +1,7 @@
 // Libraries
 import React, { useReducer } from "react";
 import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 import AuthContext from "./context";
 import AuthReducer from "./reducer";
 
@@ -8,6 +9,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
@@ -28,6 +30,24 @@ const AuthState = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   // Load user
+  const loadUser = async () => {
+    // Method that helps us automatically pass our token as a header, if one exists
+    // Helps us not have to repititively pass the token each time we make a request to a private route
+    if (localStorage.token) setAuthToken(localStorage.token);
+
+    try {
+      const res = await axios.get(`${backendUrl}/api/auth`);
+
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: AUTH_ERROR
+      });
+    }
+  };
 
   // Register user
   const registerUser = async formData => {
@@ -45,6 +65,8 @@ const AuthState = ({ children }) => {
         type: REGISTER_SUCCESS,
         payload: res.data
       });
+
+      loadUser();
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
@@ -65,7 +87,8 @@ const AuthState = ({ children }) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         error: state.error,
-        registerUser
+        registerUser,
+        loadUser
       }}
     >
       {children}

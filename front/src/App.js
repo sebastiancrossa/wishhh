@@ -6,6 +6,8 @@ import AuthState from "./context/Auth/state";
 import WishListState from "./context/WishList/state";
 import AlertState from "./context/Alert/state";
 
+import setAuthToken from "./utils/setAuthToken";
+
 import { toast } from "react-toastify";
 
 // Component Imports
@@ -15,6 +17,8 @@ import Register from "./pages/Register";
 import Alerts from "./components/layout/Navbar";
 
 toast.configure();
+
+if (localStorage.token) setAuthToken(localStorage.token);
 
 function App() {
   return (
