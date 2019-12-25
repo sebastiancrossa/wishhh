@@ -6,11 +6,15 @@ import AuthState from "./context/Auth/state";
 import WishListState from "./context/WishList/state";
 import AlertState from "./context/Alert/state";
 
+import { toast } from "react-toastify";
+
 // Component Imports
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Alerts from "./components/layout/Navbar";
+
+toast.configure();
 
 function App() {
   return (

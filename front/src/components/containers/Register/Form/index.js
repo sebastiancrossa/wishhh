@@ -1,14 +1,21 @@
 // Libraries
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AuthContext from "../../../../context/Auth/context";
 import useInputState from "../../../../hooks/useInputState";
 
+import { ToastContainer, toast } from "react-toastify";
+
 // Styles
 import { CustomForm, CustomInput, SubmitButton } from "./form.style";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
   const authContext = useContext(AuthContext);
-  const { registerUser } = authContext;
+  const { registerUser, error } = authContext;
+
+  useEffect(() => {
+    if (error) toast.error(`${error}`);
+  }, [error]);
 
   // Form state
   const [name, setName, onNameChange, resetName] = useInputState("");
@@ -88,6 +95,8 @@ const Form = () => {
             onChange={onVerifyPasswordChange}
           />
         </div>
+
+        <ToastContainer />
 
         <SubmitButton disabled={isInvalid} onClick={() => handleSubmit()}>
           Register
