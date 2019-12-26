@@ -1,5 +1,5 @@
 // Libraries
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import WishListContext from "../../../../context/WishList/context";
 import { CSSTransition } from "react-transition-group";
 
@@ -12,9 +12,11 @@ import { Grid } from "./listItems.styled";
 
 const ListItems = () => {
   const wishListContext = useContext(WishListContext);
+  const { getItems, items, loading } = wishListContext;
 
-  // Deconstructing our items from state
-  const { items } = wishListContext;
+  useEffect(() => {
+    getItems();
+  }, []);
 
   return (
     <SectionContainer>
@@ -22,18 +24,22 @@ const ListItems = () => {
         Your wish list items
       </h1>
 
-      <Grid>
-        {items.map(item => (
-          <CSSTransition key={item.id} timeout={500} classNames="item">
-            <ListItem
-              id={item.id}
-              name={item.name}
-              link={item.link}
-              isBought={item.isBought}
-            />
-          </CSSTransition>
-        ))}
-      </Grid>
+      {!loading ? (
+        <Grid>
+          {items.map(item => (
+            <CSSTransition key={item.id} timeout={500} classNames="item">
+              <ListItem
+                id={item.id}
+                name={item.name}
+                link={item.link}
+                isBought={item.isBought}
+              />
+            </CSSTransition>
+          ))}
+        </Grid>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </SectionContainer>
   );
 };

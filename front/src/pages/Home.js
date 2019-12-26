@@ -9,9 +9,10 @@ import ListItems from "../components/containers/Home/ListItems";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
+  const { loadUser } = authContext;
 
   useEffect(() => {
-    authContext.loadUser();
+    loadUser();
   }, []);
 
   return (

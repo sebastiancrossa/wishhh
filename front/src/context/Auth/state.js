@@ -99,13 +99,9 @@ const AuthState = ({ children }) => {
 
   // Logout user
   const logoutUser = () => {
-    try {
-      dispatch({
-        type: LOGOUT
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
+    dispatch({
+      type: LOGOUT
+    });
   };
 
   // Clear errors

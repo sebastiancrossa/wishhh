@@ -1,57 +1,67 @@
 // Libraries
 import React, { useReducer } from "react";
-import uuid from "uuid";
+import axios from "axios";
 
 import WishListContext from "./context";
 import WishListReducer from "./reducer";
-import { ADD_LIST_ITEM, DELETE_LIST_ITEM } from "../types";
+import {
+  GET_ITEMS,
+  ADD_LIST_ITEM,
+  DELETE_LIST_ITEM,
+  ITEM_ERROR
+} from "../types";
+
+const { backendUrl } = require("../../utils/config/configVariables");
 
 const WishListState = props => {
   const initialState = {
-    items: [
-      {
-        id: 1,
-        name: "iPad Pro",
-        isBought: false,
-        link: "https://amazon.com"
-      },
-      {
-        id: 2,
-        name: "Waking Up book",
-        isBought: true,
-        link: "https://godreads.com"
-      },
-      {
-        id: 3,
-        name: "LG Monitor",
-        isBought: false,
-        link: "https://lg.com"
-      },
-      {
-        id: 4,
-        name: "MIDI player",
-        isBought: false,
-        link: "https://midiplayersforsale.com"
-      },
-      {
-        id: 5,
-        name: "iPhone 12 Pro Max",
-        isBought: false,
-        link: "https://apple.com"
-      }
-    ]
+    items: [],
+    loading: true,
+    error: null
   };
 
   const [state, dispatch] = useReducer(WishListReducer, initialState);
 
-  // Add item
-  const addListItem = listItem => {
-    listItem.id = uuid.v4();
+  // Get Items
+  const getItems = async () => {
+    try {
+      const res = await axios.get(`${backendUrl}/api/wishes`);
 
-    dispatch({
-      type: ADD_LIST_ITEM,
-      payload: listItem
-    });
+      dispatch({
+        type: GET_ITEMS,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: error.response.message
+      });
+    }
+  };
+
+  // Add item
+  const addListItem = async listItem => {
+    const config = {
+      headers: { "Content-Type": "application/json" }
+    };
+
+    try {
+      const res = await axios.post(
+        `${backendUrl}/api/wishes`,
+        listItem,
+        config
+      );
+
+      dispatch({
+        type: ADD_LIST_ITEM,
+        payload: res.data
+      });
+    } catch (error) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: error.response.message
+      });
+    }
   };
 
   // Delete item
@@ -62,16 +72,17 @@ const WishListState = props => {
     });
   };
 
-  // Set current item
-  // Clear current item
-  // Update item
-  // Filter items
-  // Clear filter
-
   // Returning our provider, which we will be able to use to access our state while wrapping it in our app
   return (
     <WishListContext.Provider
-      value={{ items: state.items, addListItem, deleteItem }}
+      value={{
+        items: state.items,
+        error: state.error,
+        loading: state.loading,
+        getItems,
+        addListItem,
+        deleteItem
+      }}
     >
       {props.children}
     </WishListContext.Provider>
