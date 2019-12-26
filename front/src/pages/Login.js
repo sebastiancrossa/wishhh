@@ -7,6 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import Navbar from "../components/layout/Navbar";
 import Form from "../components/containers/Login/Form";
 
+// Styles
+import "react-toastify/dist/ReactToastify.css";
+
 const Login = ({ history }) => {
   const authContext = useContext(AuthContext);
   const { loadUser, isAuthenticated, error } = authContext;

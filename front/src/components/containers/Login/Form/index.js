@@ -6,14 +6,13 @@ import useInputState from "../../../../hooks/useInputState";
 
 // Styles
 import { CustomForm, CustomInput, SubmitButton } from "./form.style";
-import "react-toastify/dist/ReactToastify.css";
+import { ExternalLink } from "../../../../style";
 
 const Form = () => {
   const authContext = useContext(AuthContext);
   const { loginUser } = authContext;
 
   // Form state
-  const [name, setName, onNameChange, resetName] = useInputState("");
   const [email, setEmail, onEmailChange, resetEmail] = useInputState("");
   const [
     password,
@@ -24,12 +23,10 @@ const Form = () => {
 
   const handleSubmit = () => {
     loginUser({
-      name,
       email,
       password
     });
 
-    resetName();
     resetEmail();
     resetPassword();
   };
@@ -43,17 +40,6 @@ const Form = () => {
 
       <div style={{ marginBottom: "1rem", textAlign: "left" }}>
         <div style={{ marginBottom: "0.7rem" }}>
-          <p>Name:</p>
-          <CustomInput
-            type="text"
-            placeholder="Name..."
-            value={name}
-            onChange={onNameChange}
-            required
-          />
-        </div>
-
-        <div style={{ marginBottom: "0.7rem" }}>
           <p>Email:</p>
           <CustomInput
             type="text"
@@ -64,7 +50,7 @@ const Form = () => {
           />
         </div>
 
-        <div style={{ marginBottom: "0.7rem" }}>
+        <div style={{ marginBottom: "0.5rem" }}>
           <p>Password:</p>
           <CustomInput
             type="password"
@@ -73,6 +59,10 @@ const Form = () => {
             onChange={onPasswordChange}
           />
         </div>
+
+        <ExternalLink to="/register">
+          Don't have an account? Register here
+        </ExternalLink>
 
         <SubmitButton disabled={isInvalid} onClick={() => handleSubmit()}>
           Login

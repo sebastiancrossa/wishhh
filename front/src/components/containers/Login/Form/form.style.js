@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const CustomForm = styled.div`
   margin: 0 auto;
@@ -32,6 +33,7 @@ export const CustomInput = styled.input`
 export const SubmitButton = styled.button`
   width: 100%;
 
+  margin-top: 0.7rem;
   padding: 0.8rem;
   border-radius: 5px;
 

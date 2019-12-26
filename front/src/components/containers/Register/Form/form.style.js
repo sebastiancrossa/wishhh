@@ -32,6 +32,7 @@ export const CustomInput = styled.input`
 export const SubmitButton = styled.button`
   width: 100%;
 
+  margin-top: 0.7rem;
   padding: 0.8rem;
   border-radius: 5px;
 
