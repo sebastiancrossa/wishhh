@@ -26,7 +26,7 @@ const Form = () => {
     resetLink();
   };
 
-  const isInvalid = name === "";
+  const isInvalid = name === "" || link === "";
 
   return (
     <CustomForm>
