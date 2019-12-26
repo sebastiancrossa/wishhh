@@ -27,7 +27,7 @@ const ListItems = () => {
       {!loading ? (
         <Grid>
           {items.map(item => (
-            <CSSTransition key={item.id} timeout={500} classNames="item">
+            <CSSTransition key={item._id} timeout={500} classNames="item">
               <ListItem
                 id={item._id}
                 name={item.name}

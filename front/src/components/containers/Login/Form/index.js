@@ -1,25 +1,16 @@
 // Libraries
-import React, { useContext, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useContext } from "react";
 
 import AuthContext from "../../../../context/Auth/context";
 import useInputState from "../../../../hooks/useInputState";
-
-import { ToastContainer, toast } from "react-toastify";
 
 // Styles
 import { CustomForm, CustomInput, SubmitButton } from "./form.style";
 import "react-toastify/dist/ReactToastify.css";
 
-const Form = ({ history }) => {
+const Form = () => {
   const authContext = useContext(AuthContext);
-  const { loginUser, isAuthenticated, error } = authContext;
-
-  useEffect(() => {
-    if (error) toast.error(`${error}`);
-
-    if (isAuthenticated) history.push("/");
-  }, [error, isAuthenticated]);
+  const { loginUser } = authContext;
 
   // Form state
   const [name, setName, onNameChange, resetName] = useInputState("");
@@ -91,4 +82,4 @@ const Form = ({ history }) => {
   );
 };
 
-export default withRouter(Form);
+export default Form;

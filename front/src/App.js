@@ -20,7 +20,7 @@ toast.configure();
 
 if (localStorage.token) setAuthToken(localStorage.token);
 
-function App() {
+const App = () => {
   return (
     <AuthState>
       <AlertState>
@@ -38,6 +38,6 @@ function App() {
       </AlertState>
     </AuthState>
   );
-}
+};
 
 export default App;
