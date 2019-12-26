@@ -65,7 +65,21 @@ const WishListState = props => {
   };
 
   // Delete item
-  const deleteItem = id => {
+  const deleteItem = async id => {
+    try {
+      await axios.delete(`${backendUrl}/api/wishes/${id}`);
+
+      dispatch({
+        type: DELETE_LIST_ITEM,
+        payload: id
+      });
+    } catch (error) {
+      dispatch({
+        type: ITEM_ERROR,
+        payload: error.response.message
+      });
+    }
+
     dispatch({
       type: DELETE_LIST_ITEM,
       payload: id

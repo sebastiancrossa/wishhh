@@ -29,7 +29,7 @@ const ListItems = () => {
           {items.map(item => (
             <CSSTransition key={item.id} timeout={500} classNames="item">
               <ListItem
-                id={item.id}
+                id={item._id}
                 name={item.name}
                 link={item.link}
                 isBought={item.isBought}
