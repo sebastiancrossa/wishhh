@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Alerts from "./components/layout/Navbar";
 
 toast.configure();
 
@@ -27,7 +26,6 @@ function App() {
       <AlertState>
         <WishListState>
           <BrowserRouter>
-            <Alerts />
             <Switch>
               <ProtectedRoute exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />

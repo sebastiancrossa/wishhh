@@ -12,8 +12,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
-  CLEAR_ERRORS
+  LOGOUT
 } from "../types";
 
 const { backendUrl } = require("../../utils/config/configVariables");
@@ -99,6 +98,15 @@ const AuthState = ({ children }) => {
   };
 
   // Logout user
+  const logoutUser = () => {
+    try {
+      dispatch({
+        type: LOGOUT
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   // Clear errors
 
@@ -112,6 +120,7 @@ const AuthState = ({ children }) => {
         error: state.error,
         loginUser,
         registerUser,
+        logoutUser,
         loadUser
       }}
     >

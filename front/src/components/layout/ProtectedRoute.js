@@ -1,10 +1,10 @@
 // Libraries
 import React, { useContext } from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 import AuthContext from "../../context/Auth/context";
 
-const ProtectedRoute = ({ history, component: Component, ...rest }) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
 
   return (

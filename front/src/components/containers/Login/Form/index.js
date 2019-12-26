@@ -43,7 +43,7 @@ const Form = ({ history }) => {
     resetPassword();
   };
 
-  // Makes sure both passwords entered are the same before they can make the request
+  // Makes sure the password field is not empty
   const isInvalid = password === "";
 
   return (
