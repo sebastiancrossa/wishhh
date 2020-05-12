@@ -25,18 +25,24 @@ const ListItems = () => {
       </h1>
 
       {!loading ? (
-        <Grid>
-          {items.map(item => (
-            <CSSTransition key={item._id} timeout={500} classNames="item">
-              <ListItem
-                id={item._id}
-                name={item.name}
-                link={item.link}
-                isBought={item.isBought}
-              />
-            </CSSTransition>
-          ))}
-        </Grid>
+        items.length == 0 ? (
+          <h1 style={{ textAlign: "center", opacity: "0.2" }}>
+            You don't have any items on your list, ¡Go ahead and add one now!
+          </h1>
+        ) : (
+          <Grid>
+            {items.map((item) => (
+              <CSSTransition key={item._id} timeout={500} classNames="item">
+                <ListItem
+                  id={item._id}
+                  name={item.name}
+                  link={item.link}
+                  isBought={item.isBought}
+                />
+              </CSSTransition>
+            ))}
+          </Grid>
+        )
       ) : (
         <h1>Loading...</h1>
       )}

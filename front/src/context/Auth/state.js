@@ -12,7 +12,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
 } from "../types";
 
 const { backendUrl } = require("../../utils/config/configVariables");
@@ -23,7 +23,7 @@ const AuthState = ({ children }) => {
     user: null,
     isAuthenticated: null,
     loading: true,
-    error: null
+    error: null,
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -39,21 +39,21 @@ const AuthState = ({ children }) => {
 
       dispatch({
         type: USER_LOADED,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
       });
     }
   };
 
   // Register user
-  const registerUser = async formData => {
+  const registerUser = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
 
     try {
@@ -62,24 +62,24 @@ const AuthState = ({ children }) => {
       // We are passing the token from the user created to the payload, which is received if there are no errors after calling our api
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
 
       loadUser();
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.msg
+        payload: error.response.data.msg,
       });
     }
   };
 
   // Login user
-  const loginUser = async formData => {
+  const loginUser = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     };
 
     try {
@@ -87,12 +87,12 @@ const AuthState = ({ children }) => {
 
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: error.response.data.msg
+        payload: error.response.data.msg,
       });
     }
   };
@@ -100,11 +100,9 @@ const AuthState = ({ children }) => {
   // Logout user
   const logoutUser = () => {
     dispatch({
-      type: LOGOUT
+      type: LOGOUT,
     });
   };
-
-  // Clear errors
 
   return (
     <AuthContext.Provider
@@ -117,7 +115,7 @@ const AuthState = ({ children }) => {
         loginUser,
         registerUser,
         logoutUser,
-        loadUser
+        loadUser,
       }}
     >
       {children}

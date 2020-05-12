@@ -19,7 +19,7 @@ const ListItem = ({ id, name, link, isBought }) => {
 
         <p
           style={{
-            fontWeight: "700"
+            fontWeight: "700",
           }}
         >
           {name}
