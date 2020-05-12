@@ -13,7 +13,7 @@ const ListItem = require("../models/WishListItem");
 router.get("/", auth, async (req, res) => {
   try {
     const listItems = await ListItem.find({ user: req.user.id }).sort({
-      date: -1
+      date: -1,
     });
 
     res.json(listItems);
@@ -28,14 +28,7 @@ router.get("/", auth, async (req, res) => {
 // @access  Private
 router.post(
   "/",
-  [
-    auth,
-    [
-      check("name", "Product name is required")
-        .not()
-        .isEmpty()
-    ]
-  ],
+  [auth, [check("name", "Product name is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
 
@@ -51,7 +44,7 @@ router.post(
         name,
         isBought,
         link,
-        user: req.user.id
+        user: req.user.id,
       });
 
       const listItem = await newListItem.save();
